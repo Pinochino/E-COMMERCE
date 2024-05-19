@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import background from '../assets/Images/home/Background.jpg';
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { CiLocationOn, CiUser, CiHeart, CiSearch } from "react-icons/ci";
 import { IoBagOutline } from "react-icons/io5";
+import { IoIosArrowDown } from "react-icons/io";
 import logo1 from "../assets/Images/Icon/logo1.svg";
 import logo2 from "../assets/Images/Icon/logo2.svg";
+
 
 
 
@@ -22,7 +24,7 @@ let Navbar = () => {
     }
 
     let [isHover, setHover] = useState(false);
-    
+
     let handleMouseEnter = () => {
         setHover(true);
     }
@@ -31,8 +33,14 @@ let Navbar = () => {
         setHover(false);
     }
 
+    let [isToggle, setToggle] = useState(false);
+    let handleToggle = () => {
+       setToggle(!isToggle)
+    };
+
+
     return (
-        <div className="uk-container uk-container-1510">
+        <div className="uk-container-expand">
             <div className="navbar-header">
                 <ul className="uk-flex uk-flex-between uk-flex-center">
                     <button onClick={prev}>
@@ -46,11 +54,11 @@ let Navbar = () => {
                     </button>
                 </ul>
             </div>
-            <div className={`navbar-body ${isHover ? 'hover' : ''}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <div className={`navbar-body uk-margin-medium-bottom ${isHover ? 'hover' : ''}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 <ul className={`navbar-body-content ${isHover ? 'color' : ''}`} >
                     <li>
-                        <img src={logo1} style={{height:'19px'}}></img>
-                        <img src={logo2} style={{height:'25px', padding:'0 15px'}}></img>
+                        <img src={logo1} style={{ height: '19px' }}></img>
+                        <img src={logo2} style={{ height: '25px', padding: '0 15px' }}></img>
                     </li>
                     <li>
                         <div className="navbar-input-sum">
@@ -74,7 +82,26 @@ let Navbar = () => {
                     </li>
                 </ul>
             </div>
-            <img className="navbar-background img-scaledown" src={background} alt="background"></img>
+
+            <div className={`navbar-menu uk-margin-medium-bottom ${isHover ? 'color' : null}`} >
+                <ul className="navbar-menu-list">
+                        <li>
+                            <span>Sản phẩm mới </span>
+                            <button onClick={() => handleToggle()}
+                            ><IoIosArrowDown className={`button-toggle ${isToggle ? 'rotate' : 'unrotate'} `} /></button>
+                        </li>
+
+                    <li>Nam <IoIosArrowDown /></li>
+                    <li>Nữ <IoIosArrowDown /></li>
+                    <li>Polo <IoIosArrowDown /></li>
+                    <li>Giày thể thao <IoIosArrowDown /></li>
+                    <li>Bộ sưu tập <IoIosArrowDown /></li>
+                    <li>Khám phá Lacoste <IoIosArrowDown /></li>
+                </ul>
+            </div>
+
+            <div className={`navbar-menu-background ${isToggle ? 'active' : ''}`}></div>
+            <img className="navbar-background img-scaledown uk-container" src={background} alt="background"></img>
 
         </div>
     )
